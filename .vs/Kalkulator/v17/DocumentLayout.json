@@ -18,8 +18,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "D:\\Projekty C#\\Kalkulator\\Kalkulator\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "Kalkulator\\MainWindow.xaml.cs",
+              "ToolTip": "D:\\Projekty C#\\Kalkulator\\Kalkulator\\MainWindow.xaml.cs",
+              "RelativeToolTip": "Kalkulator\\MainWindow.xaml.cs",
+              "ViewState": "AQIAAHAAAAAAAAAAAAAlwIgAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-19T17:18:23.003Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -30,19 +43,6 @@
               "RelativeToolTip": "Kalkulator\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-03-19T17:18:25.832Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "D:\\Projekty C#\\Kalkulator\\Kalkulator\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Kalkulator\\MainWindow.xaml.cs",
-              "ToolTip": "D:\\Projekty C#\\Kalkulator\\Kalkulator\\MainWindow.xaml.cs",
-              "RelativeToolTip": "Kalkulator\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAHAAAAAAAAAAAAAQwIYAAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-19T17:18:23.003Z",
               "EditorCaption": ""
             }
           ]
@@ -58,6 +58,16 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 1193,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{a80febb4-e7e0-4147-b476-21aaf2453969}"
             }
           ]
         }

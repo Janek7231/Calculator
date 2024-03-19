@@ -18,3 +18,4 @@ D:\Projekty C#\Kalkulator\Kalkulator\obj\Debug\net8.0-windows\refint\Kalkulator.
 D:\Projekty C#\Kalkulator\Kalkulator\obj\Debug\net8.0-windows\Kalkulator.pdb
 D:\Projekty C#\Kalkulator\Kalkulator\obj\Debug\net8.0-windows\Kalkulator.genruntimeconfig.cache
 D:\Projekty C#\Kalkulator\Kalkulator\obj\Debug\net8.0-windows\ref\Kalkulator.dll
+D:\Projekty C#\Kalkulator\Kalkulator\obj\Debug\net8.0-windows\Kalkulator.sourcelink.json

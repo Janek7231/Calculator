@@ -34,48 +34,57 @@ namespace Kalkulator
 
         private void ButtonDivide_Click(object sender, RoutedEventArgs e)
         {
+            var operation = CurrentOperationText.Text;
+
+            if (ContainsOperatioin(operation))
+            {
+                CurrentOperationText.Text = CalculateResult(operation).ToString();
+            }
             CurrentOperationText.Text += "/";
         }
 
         private void ButtonMuyltiply_Click(object sender, RoutedEventArgs e)
         {
+            var operation = CurrentOperationText.Text;
+
+            if (ContainsOperatioin(operation))
+            {
+                CurrentOperationText.Text = CalculateResult(operation).ToString();
+            }
             CurrentOperationText.Text += "x";
         }
 
         private void ButtonMinus_Click(object sender, RoutedEventArgs e)
         {
+            var operation = CurrentOperationText.Text;
+
+            if (ContainsOperatioin(operation))
+            {
+                CurrentOperationText.Text = CalculateResult(operation).ToString();
+            }
             CurrentOperationText.Text += "-";
         }
 
         private void ButtonPlus_Click(object sender, RoutedEventArgs e)
         {
+            var operation = CurrentOperationText.Text;
+
+            if(ContainsOperatioin(operation))
+            {
+                CurrentOperationText.Text = CalculateResult(operation).ToString();
+            }
             CurrentOperationText.Text += "+";
         }
 
         private void ButtonDot_Click(object sender, RoutedEventArgs e)
         {
+
             CurrentOperationText.Text += ",";
         }
 
         private void ButtonResult_Click(object sender, RoutedEventArgs e)
         {
             var operation = CurrentOperationText.Text;
-            //var tempOperation = operation;
-            //if (operation.Contains('%'))
-            //{
-            //    var elements = tempOperation.Split('%');
-            //    var result = double.Parse(elements[0]) / 100;
-            //    tempOperation = result.ToString();
-            //}
-
-            //if (operation.Contains(','))
-            //{
-            //    var elements = operation.Split(',');
-            //    string result = elements[0] + elements[1];
-
-            //    ResultText.Text = result;
-            //}
-
 
             ResultText.Text = CalculateResult(operation).ToString();
             CurrentOperationText.Text = string.Empty;
@@ -126,13 +135,14 @@ namespace Kalkulator
                 var elements = operation.Split('/');
                 return double.Parse(elements[0]) / double.Parse(elements[1]);
             }
-            if (operation.Contains('*'))
-            {
-                var elements = operation.Split('*');
-                return double.Parse(elements[0]) + double.Parse(elements[1]);
-            }
+            
 
             return 0;
+        }
+
+        private bool ContainsOperatioin(string operation)
+        {
+            return operation.Contains("+") || operation.Contains("-") || operation.Contains("x") || operation.Contains("/");
         }
     }
 }
