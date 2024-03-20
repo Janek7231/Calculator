@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Kalkulator
@@ -112,6 +113,10 @@ namespace Kalkulator
         private void ButtonBackspace_Click(object sender, RoutedEventArgs e)
         {
             var tempOperationText = string.Empty;
+            if(CurrentOperationText.Text != string.Empty)
+            {
+                calc = 0;
+            }
             if(CurrentOperationText.Text.Length > 0)
             {
                 tempOperationText = CurrentOperationText.Text.Substring(0, CurrentOperationText.Text.Length - 1);
@@ -122,7 +127,7 @@ namespace Kalkulator
 
         private string checkingPercent(string element)
         {
-            if (element.Contains('%'))
+            if (element.Contains('%') && element[element.Length-1] == '%')
             {
                 string Telement = element.Substring(0, element.Length - 1);
 
@@ -196,8 +201,21 @@ namespace Kalkulator
                     result = -result1;
                 }
             }
+            var separators = new[] { '-','x','/','+' };
+            bool sep = false;
+            foreach (char separator in separators)
+            {
+                if (operation.Contains(separator))
+                {
+                    sep = true;
+                }
+            }
+            if (operation.Contains('%') && sep == false)
+            {
+                result = double.Parse(checkingPercent(operation));
+            }
 
-            
+
             return Math.Round(result,4);
         }
 
