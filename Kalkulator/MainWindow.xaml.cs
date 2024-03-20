@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System.Linq.Expressions;
+using System.Windows;
 using System.Windows.Controls;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Kalkulator
 {
@@ -14,9 +16,9 @@ namespace Kalkulator
 
             ResultText.Text = string.Empty;
             CurrentOperationText.Text = string.Empty;
-            string TempOperationText = string.Empty;
+            
         }
-
+        int calc = 0;
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -30,13 +32,19 @@ namespace Kalkulator
                 CurrentOperationText.Text += '0';
             }
             CurrentOperationText.Text += currenNumber;
+
+            if(calc != 0)
+            {
+                var operation = CurrentOperationText.Text;
+                ResultText.Text = CalculateResult(operation).ToString();
+            }
         }
 
         private void ButtonDivide_Click(object sender, RoutedEventArgs e)
         {
             var operation = CurrentOperationText.Text;
 
-            if (ContainsOperatioin(operation))
+            if (ContainsOperatioin(operation) && calc != 0)
             {
                 CurrentOperationText.Text = CalculateResult(operation).ToString();
             }
@@ -47,7 +55,7 @@ namespace Kalkulator
         {
             var operation = CurrentOperationText.Text;
 
-            if (ContainsOperatioin(operation))
+            if (ContainsOperatioin(operation) && calc != 0)
             {
                 CurrentOperationText.Text = CalculateResult(operation).ToString();
             }
@@ -58,7 +66,7 @@ namespace Kalkulator
         {
             var operation = CurrentOperationText.Text;
 
-            if (ContainsOperatioin(operation))
+            if (ContainsOperatioin(operation) && calc != 0)
             {
                 CurrentOperationText.Text = CalculateResult(operation).ToString();
             }
@@ -69,7 +77,7 @@ namespace Kalkulator
         {
             var operation = CurrentOperationText.Text;
 
-            if(ContainsOperatioin(operation))
+            if(ContainsOperatioin(operation) && calc != 0)
             {
                 CurrentOperationText.Text = CalculateResult(operation).ToString();
             }
@@ -78,7 +86,6 @@ namespace Kalkulator
 
         private void ButtonDot_Click(object sender, RoutedEventArgs e)
         {
-
             CurrentOperationText.Text += ",";
         }
 
@@ -87,13 +94,14 @@ namespace Kalkulator
             var operation = CurrentOperationText.Text;
 
             ResultText.Text = CalculateResult(operation).ToString();
-            CurrentOperationText.Text = string.Empty;
+            //CurrentOperationText.Text = string.Empty;
         }
 
         private void ButtonClear_Click(object sender, RoutedEventArgs e)
         {
             CurrentOperationText.Text = string.Empty;
             ResultText.Text = string.Empty;
+            calc = 0;
         }
 
         private void ButtonPercent_Click(object sender, RoutedEventArgs e)
@@ -112,37 +120,92 @@ namespace Kalkulator
             }
         }
 
+        private string checkingPercent(string element)
+        {
+            if (element.Contains('%'))
+            {
+                string Telement = element.Substring(0, element.Length - 1);
+
+                double result1 = double.Parse(Telement) / 100;
+                Telement = result1.ToString();
+                return Telement;
+            }
+            return element;
+        }
+
         private double CalculateResult(string operation)
         {
-            
-            if (operation.Contains('+'))
+            calc += 1;
+            double result = 0;
+            if (operation[0] != '-')
             {
-                var elements = operation.Split('+');
-                return double.Parse(elements[0]) + double.Parse(elements[1]);
-            }
-            if (operation.Contains('-'))
-            {
-                var elements = operation.Split('-');
-                return double.Parse(elements[0]) - double.Parse(elements[1]);
-            }
-            if (operation.Contains('x'))
-            {
-                var elements = operation.Split('x');
-                return double.Parse(elements[0]) * double.Parse(elements[1]);
-            }
-            if (operation.Contains('/'))
-            {
-                var elements = operation.Split('/');
-                return double.Parse(elements[0]) / double.Parse(elements[1]);
-            }
-            
+                if (operation.Contains('+'))
+                {
+                    var elements = operation.Split('+');
+                    result = double.Parse(checkingPercent(elements[0])) + double.Parse(checkingPercent(elements[1]));
+                }
+                else if (operation.Contains('-'))
+                {
+                    var elements = operation.Split('-');
+                    result = double.Parse(checkingPercent(elements[0])) - double.Parse(checkingPercent(elements[1]));
 
-            return 0;
+                }
+                else if (operation.Contains('x'))
+                {
+                    var elements = operation.Split('x');
+                    result = double.Parse(checkingPercent(elements[0])) * double.Parse(checkingPercent(elements[1]));
+                }
+                else if (operation.Contains('/'))
+                {
+                    var elements = operation.Split('/');
+                    result = double.Parse(checkingPercent(elements[0])) / double.Parse(checkingPercent(elements[1]));
+                }
+                else if (operation.Contains('%'))
+                {
+                    var result1 = result / 100;
+                    result = result1;
+                }
+            } else
+            {
+                operation = operation.Remove(0, 1);
+
+                if (operation.Contains('+'))
+                {
+                    var elements = operation.Split('+');
+                    result = (-double.Parse(checkingPercent(elements[0]))) + double.Parse(checkingPercent(elements[1]));
+                }
+                else if (operation.Contains('-'))
+                {
+                    var elements = operation.Split('-');
+                    result = (-double.Parse(checkingPercent(elements[0]))) - double.Parse(checkingPercent(elements[1]));
+
+                }
+                else if (operation.Contains('x'))
+                {
+                    var elements = operation.Split('x');
+                    result = (-double.Parse(checkingPercent(elements[0]))) * double.Parse(checkingPercent(elements[1]));
+                }
+                else if (operation.Contains('/'))
+                {
+                    var elements = operation.Split('/');
+                    result = (-double.Parse(checkingPercent(elements[0]))) / double.Parse(checkingPercent(elements[1]));
+                }
+                else if (operation.Contains('%'))
+                {
+                    var result1 = result / 100;
+                    result = -result1;
+                }
+            }
+
+            
+            return Math.Round(result,4);
         }
 
         private bool ContainsOperatioin(string operation)
         {
             return operation.Contains("+") || operation.Contains("-") || operation.Contains("x") || operation.Contains("/");
         }
+
+
     }
 }
